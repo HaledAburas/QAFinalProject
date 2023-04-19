@@ -44,6 +44,7 @@ public class Appium2048appTest {
     }
 
     @Test
+    //this test case is testing the swipe action in the app
         public void TestSwipe() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         changeLogMessege();
@@ -67,6 +68,7 @@ public class Appium2048appTest {
     }
 
     @Test
+    //this test case testing if the score shows the correct number
     public void Score(){
         Wait();
         WebElement ScoreNewGAme_Element = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[2]/android.view.View[1]/android.widget.TextView"));
@@ -74,6 +76,7 @@ public class Appium2048appTest {
         Assertions.assertEquals("0",scoreBeforeMerge);
     }
     @Test
+    //this test case  shows of the new game button works as intended
     public void NewGameButton() throws InterruptedException{
         Wait();
         Thread.sleep(2000);
@@ -85,6 +88,7 @@ public class Appium2048appTest {
         NewGameConfirmation.click();
     }
     @Test
+    //this test shows if the Undo button works as intended
     public void UndoButton() throws InterruptedException{
         Wait();
         Thread.sleep(2000);
