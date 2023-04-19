@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.swing.plaf.TableHeaderUI;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -15,6 +16,7 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OldSchool_runescapeTest {
+
     public WebDriver driver = null;
 
     @BeforeEach
@@ -25,6 +27,7 @@ public class OldSchool_runescapeTest {
     }
     //****************************************************************************************************************************************************
 
+
     @Test
     @DisplayName("Verify Url")
     public void testUrl() {
@@ -33,7 +36,9 @@ public class OldSchool_runescapeTest {
         driver.getPageSource();
     }
 
+
     @Test
+    // This test case logs in to the website
     @DisplayName("Login test - im not robot")
     public void LoginTest() throws InterruptedException {
         driver.get("https://oldschool.runescape.com");
@@ -51,22 +56,30 @@ public class OldSchool_runescapeTest {
         Password.sendKeys("ShturJtks1");
         Password.submit();
         String pageTitle = driver.getTitle();
+        Thread.sleep(3000);
         Assertions.assertTrue(pageTitle.contains("RuneScape | Old School RuneScape"), "Page title does not contain RuneScape | Old School RuneScape");
     }
 
+    // This test case searches for a user in the highscores using the search bar
     @Test
     @DisplayName("HighScore Search Bar test")
     public void HighScore_SearchTest() {
+        // Open the Old School RuneScape highscores page
         driver.get("https://secure.runescape.com/m=hiscore_oldschool/overall#_ga=2.55925227.1776783215.1678470563-1885399325.1676315357");
+        // Allow cookies
         WebElement AllowCookies = driver.findElement(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"));
         AllowCookies.click();
+        // Enter the user in the search box
         WebElement UserSeearchBox = driver.findElement(By.name("user1"));
         UserSeearchBox.sendKeys("Zydraxis");
         UserSeearchBox.submit();
+        // Verify that the current URL is correct
         Assertions.assertEquals("https://secure.runescape.com/m=hiscore_oldschool/hiscorepersonal", driver.getCurrentUrl());
-
     }
+
+
     @Test
+// This test case checks the navigation bar dropdown in the highscores
     @DisplayName("IronMan navigation bar Dropdown using Action  test")
     public void HighScore_NavigatioBar() throws InterruptedException {
         driver.get("https://secure.runescape.com/m=hiscore_oldschool/overall");
@@ -89,6 +102,7 @@ public class OldSchool_runescapeTest {
     }
 
     @Test
+    //this test case checks the sidebar scroller in the highscores page
     @DisplayName("HighScores sidebar scroll UP & DOWN test")
     public void ScrollUP_Down_Highscores() throws InterruptedException {
         driver.get("https://secure.runescape.com/m=hiscore_oldschool/overall");
@@ -120,6 +134,7 @@ public class OldSchool_runescapeTest {
     }
 
     @Test
+    //this test case checks if the pages are the same after using forward and backwards
     @DisplayName("Backward & Forward test")
     public void Back_forwardTest() {
         driver.get("https://oldschool.runescape.com/");
@@ -130,12 +145,14 @@ public class OldSchool_runescapeTest {
         WorldSelectButton.click();
         // go back to the previous page using the browser's back button
         driver.navigate().back();
+
         // verify that we are back on the previous page
         String expectedTitle = "Old School RuneScape - Play Old School RS";
         String actualTitle = driver.getTitle();
         assertEquals(expectedTitle, actualTitle);
         // go forward to the next page using the browser's forward button
         driver.navigate().forward();
+
         // verify that we are on the expected page
         String expectedTitle2 = "Play Old School RuneScape - World Server List";
         String actualTitle2 = driver.getTitle();
@@ -143,6 +160,7 @@ public class OldSchool_runescapeTest {
     }
 
     @Test
+    //this test case taking a screenshot from the website and saves it in the project
     @DisplayName("taking screenshot")
     public void ScreenShot() throws IOException {
         driver.get("https://oldschool.runescape.com/");
@@ -157,6 +175,7 @@ public class OldSchool_runescapeTest {
     }
 
     @Test
+    //this test case checks if the chck box work properly
     @DisplayName("Checkbox test")
     public void CheckBoxTest() throws InterruptedException {
         driver.get("https://secure.runescape.com/m=itemdb_oldschool/Zulrah%27s+scales/viewitem?obj=12934");
@@ -170,6 +189,7 @@ public class OldSchool_runescapeTest {
     }
 
     @Test
+    //this test case checks the dropdown list in the forums
     @DisplayName("DropDown List Test")
     public void DropDownList() {
         driver.get("https://secure.runescape.com/m=forum/forums#group63&_ga=2.215767767.1776783215.1678470563-1885399325.1676315357");
@@ -193,6 +213,7 @@ public class OldSchool_runescapeTest {
 
 
     @Test
+    //this test case checks if the checkout popup shows after clicking the checkout
     @DisplayName("PopUp and Price check")
     public void PopUpTest() throws InterruptedException {
         driver.get("https://runescape.backstreetmerch.com/");
@@ -210,14 +231,36 @@ public class OldSchool_runescapeTest {
         Assertions.assertTrue(popup.isDisplayed());
         WebElement checkoutButton = popup.findElement(By.xpath("//*[@id=\"mini-cart\"]/div/div[2]/div[2]/div/button"));
         checkoutButton.click();
-        WebElement TotalpriceElement = driver.findElement(By.xpath("//*[@id=\"app\"]/div/div/div/div[1]/div/aside/div[2]/div/div/div/section/div[2]/div[4]/div[2]"));
+        WebElement TotalpriceElement = driver.findElement(By.xpath("//*[@id=\"app\"]/div/div/div/div[1]/div/aside/div[2]/div/div/div/section/div[2]/div[3]/div[2]/div/div/strong"));
         String ActualPrice = TotalpriceElement.getText();
-        String ExpectedPrice = "ILS\n₪39.00";
+        String ExpectedPrice = "₪40.00";
         Assertions.assertEquals(ExpectedPrice, ActualPrice, "not the expected price");
     }
     @AfterEach
     public void quit() throws InterruptedException {
         Thread.sleep(3000);
         driver.quit();
+    }
+
+    @Test
+    @DisplayName("Copy paragraph from Wikipedia")
+    public void copyParagraphFromWikipedia() throws IOException {
+        // Navigate to the Wikipedia page
+        driver.get("https://oldschool.runescape.wiki/");
+
+
+        // Find the first paragraph element
+        WebElement paragraph = driver.findElement(By.cssSelector("#mw-content-text > div.mw-parser-output > div.mainpage-header.nomobile > div.header-intro > p"));
+
+        // Get the text of the paragraph
+        String paragraphText = paragraph.getText();
+
+        // Save the paragraph to a file
+        File paragraphFile = new File("paragraph.txt");
+        FileUtils.writeStringToFile(paragraphFile, paragraphText, "UTF-8");
+
+        // Verify that the file was created and has content
+        assertTrue(paragraphFile.exists());
+        assertTrue(paragraphFile.length() > 0);
     }
 }

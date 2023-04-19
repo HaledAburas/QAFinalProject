@@ -18,6 +18,14 @@
 
   <dependencies>
 
+    <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.41.2.1</version>
+    </dependency>
+
+
     <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
     <dependency>
       <groupId>commons-io</groupId>
@@ -27,11 +35,13 @@
 
 
     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.8.1</version>
+      <version>4.8.3</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
     <dependency>
