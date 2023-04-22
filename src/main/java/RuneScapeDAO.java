@@ -20,7 +20,7 @@ public class RuneScapeDAO {
     }
 
     public static void createNewDataBase() {
-        String url = "jdbc:sqlite:C:/My DataBase/FinalProject.db";
+        String url = "jdbc:sqlite:E:/QA_ECOM/SQL_DB/RuneScapeDB.db";
         try (Connection con = DriverManager.getConnection(url)) {
             if (con != null) {
                 DatabaseMetaData meta = con.getMetaData();
@@ -64,35 +64,7 @@ public class RuneScapeDAO {
 
         ps.executeUpdate();
     }
-    /*
-    public static void createUser(int id, String username, String Email, String Date, String password) throws SQLException {
-        String query = "INSERT INTO Runescape_Users (username, Email, password,Date)"+ "VALUES ("+id+",'"+username+"','"+Email+"','"+password+"');";
-        Statement stm = con.createStatement();
-            stm.executeUpdate(query);
-        }
 
-     */
-
-//int id, String userName, String email, String password, String BDat
-   /*
-    public static void updateTable(int id, String userName, String email, String password, String BDate) throws SQLException {
-
-        String query = "UPDATE Runescape_Users SET username=?, Email=?, password=?, Date=? WHERE id=?";
-        PreparedStatement pst = con.prepareStatement(query);
-        pst.setString(2, userName);
-        pst.setString(3, email);
-        pst.setString(4, password);
-        pst.setString(5, BDate);
-        pst.setInt(1, id);
-        int numRowsUpdated = pst.executeUpdate();
-        if (numRowsUpdated > 0) {
-            System.out.println("Record updated successfully");
-        } else {
-            System.out.println("No records were updated");
-        }
-    }
-
-    */
 
     public static void UpdateTable(RuneScapeUser updatedUser) throws SQLException{
         String query = "UPDATE Runescape_Users SET username=?, email=?, password=?, date=? WHERE id=?";
